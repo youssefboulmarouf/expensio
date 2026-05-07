@@ -6,3 +6,39 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum OrgStatus {
+  PENDING_DEPLOYMENT
+  ACTIVE
+  SUSPENDED
+  DEACTIVATED
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  fullName      String
+  passwordHash  String
+  emailVerified Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  orgs Org[]
+}
+
+model Org {
+  id              String    @id @default(cuid())
+  onChainId       String?
+  contractAddress String?
+  safeAddress     String?
+  name            String
+  logoUrl         String?
+  status          OrgStatus @default(PENDING_DEPLOYMENT)
+  chainId         Int
+  createdBy       String
+  deployedAt      DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  creator User @relation(fields: [createdBy], references: [id])
+}
