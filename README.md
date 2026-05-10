@@ -16,7 +16,7 @@ Decentralized expense management on Base — smart contract-powered group expens
 npm install
 
 # 2. Start local services
-docker-compose up -d
+docker compose up -d
 
 # 3. Copy env files and fill in values
 cp apps/api/.env.example apps/api/.env
