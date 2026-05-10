@@ -14,7 +14,9 @@
     "test": "npm run test --workspaces --if-present",
     "db:migrate": "npm run db:migrate --workspace=apps/api",
     "db:studio": "npm run db:studio --workspace=apps/api",
-    "db:generate": "npm run db:generate --workspace=apps/api"
+    "db:generate": "npm run db:generate --workspace=apps/api",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.19.0",
