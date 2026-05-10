@@ -1,5 +1,7 @@
 # Expensio
 
+[![CI](https://github.com/youssefboulmarouf/expensio/actions/workflows/ci.yml/badge.svg)](https://github.com/youssefboulmarouf/expensio/actions/workflows/ci.yml)
+
 Decentralized expense management on Base — smart contract-powered group expenses with Safe multisig integration.
 
 ## Prerequisites
