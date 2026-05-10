@@ -6,27 +6,41 @@ Decentralized expense management on Base — smart contract-powered group expens
 
 - Node.js >= 20
 - npm >= 10
-- Docker + Docker Compose (for local Postgres + Redis)
-- Git
+- PostgreSQL 16 on `localhost:5432` (user: `dev`, password: `dev`, db: `expensio`)
+- Redis 7 on `localhost:6379` (password: `dev`)
 
-## Setup
+### Option A: Run services with Docker (recommended)
 
 ```bash
-# 1. Install dependencies
-npm install
+# Postgres
+docker run -d --name expensio-postgres \
+  -e POSTGRES_USER=dev \
+  -e POSTGRES_PASSWORD=dev \
+  -e POSTGRES_DB=expensio \
+  -p 5432:5432 \
+  postgres:16-alpine
 
-# 2. Start local services
-docker compose up -d
+# Redis
+docker run -d --name expensio-redis \
+  -p 6379:6379 \
+  redis:7-alpine redis-server --requirepass dev
+```
 
-# 3. Copy env files and fill in values
-cp apps/api/.env.example apps/api/.env
-cp apps/web/.env.example apps/web/.env
-cp apps/contracts/.env.example apps/contracts/.env
+### Option B: Local installation
 
-# 4. Run database migrations (after adding schema)
-npm run --workspace=apps/api prisma migrate dev
+Install PostgreSQL 16 and Redis 7 via your system package manager and create a `dev` user with password `dev`.
 
-# 5. Start all dev servers
+## Quick Start
+
+```bash
+npm run setup
+```
+
+This will verify services are reachable, create the `expensio` database, copy `.env.example` to `.env`, install dependencies, and run migrations.
+
+Then start the dev servers:
+
+```bash
 npm run dev
 ```
 
@@ -47,11 +61,14 @@ npm run dev
 ## Scripts
 
 ```bash
+npm run setup        # One-time local environment setup
 npm run dev          # Start api + web in dev mode
 npm run build        # Build all workspaces
 npm run lint         # ESLint across all workspaces
 npm run type-check   # TypeScript check across all workspaces
 npm run test         # Run tests across all workspaces
+npm run db:migrate   # Run Prisma migrations
+npm run db:studio    # Open Prisma Studio
 ```
 
 ## Networks
