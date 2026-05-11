@@ -46,6 +46,13 @@ Then start the dev servers:
 npm run dev
 ```
 
+## Environments
+
+| Environment | Frontend | Backend |
+|-------------|----------|---------|
+| Local | http://localhost:3000 | http://localhost:3001 |
+| Staging | https://expensio.vercel.app *(placeholder)* | https://expensio-api.up.railway.app *(placeholder)* |
+
 ## Apps
 
 | App | URL | Description |
@@ -72,6 +79,26 @@ npm run test         # Run tests across all workspaces
 npm run db:migrate   # Run Prisma migrations
 npm run db:studio    # Open Prisma Studio
 ```
+
+## Deployment
+
+Every push to `main` triggers `.github/workflows/deploy-staging.yml`, which runs two parallel jobs:
+
+- **deploy-frontend** — builds the Next.js app and deploys it to Vercel production via the Vercel CLI
+- **deploy-backend** — deploys `apps/api` to Railway via the Railway CLI, which runs `prisma migrate deploy` before starting the server
+
+PRs do not trigger deployments; only merged commits to `main` do.
+
+### GitHub Secrets
+
+Add the following secrets under **Settings → Secrets and variables → Actions** in the GitHub repo:
+
+| Secret | Where to get it |
+|--------|----------------|
+| `VERCEL_TOKEN` | [vercel.com/account/tokens](https://vercel.com/account/tokens) |
+| `VERCEL_ORG_ID` | Run `vercel whoami` or copy from Project Settings → General |
+| `VERCEL_PROJECT_ID` | Vercel Project Settings → General |
+| `RAILWAY_TOKEN` | [railway.app/account/tokens](https://railway.app/account/tokens) |
 
 ## Networks
 
