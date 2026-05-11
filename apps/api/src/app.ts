@@ -1,4 +1,4 @@
-import './lib/env';
+import { env } from './config/env';
 import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
@@ -7,10 +7,7 @@ import { prisma } from './lib/prisma';
 
 const app = express();
 
-const allowedOrigins = [
-  'http://localhost:3000',
-  ...(process.env.WEB_URL ? [process.env.WEB_URL] : []),
-];
+const allowedOrigins = ['http://localhost:3000', env.WEB_URL];
 
 app.use(helmet());
 app.use(cors({ origin: allowedOrigins }));

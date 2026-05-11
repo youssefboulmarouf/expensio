@@ -80,6 +80,31 @@ npm run db:migrate   # Run Prisma migrations
 npm run db:studio    # Open Prisma Studio
 ```
 
+## Environment Variables
+
+### `apps/api`
+
+| Variable | Required | Default | Description | Example |
+|----------|----------|---------|-------------|---------|
+| `DATABASE_URL` | ✓ | — | PostgreSQL connection string | `postgresql://dev:dev@localhost:5432/expensio` |
+| `WEB_URL` | ✓ | — | Frontend origin for CORS | `http://localhost:3000` |
+| `JWT_SECRET` | ✓ | — | JWT signing secret (≥ 32 chars) | `a-long-random-secret-string` |
+| `PORT` | — | `3001` | HTTP port | `3001` |
+| `NODE_ENV` | — | `development` | Runtime environment | `production` |
+| `JWT_EXPIRY` | — | `15m` | Access token TTL | `15m` |
+| `REFRESH_TOKEN_EXPIRY` | — | `7d` | Refresh token TTL | `7d` |
+| `DIRECT_URL` | — | — | Direct DB URL (required for Supabase) | `postgresql://...` |
+| `ALCHEMY_API_KEY` | — | — | Alchemy API key (future) | — |
+| `PINATA_API_KEY` | — | — | Pinata API key (future) | — |
+
+### `apps/web`
+
+| Variable | Required | Default | Description | Example |
+|----------|----------|---------|-------------|---------|
+| `NEXT_PUBLIC_API_URL` | ✓ | — | Backend API base URL (must include protocol) | `http://localhost:3001` |
+| `NEXT_PUBLIC_CHAIN_ID` | — | — | EVM chain ID (future) | `84532` |
+| `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID` | — | — | WalletConnect project ID (future) | — |
+
 ## Deployment
 
 Every push to `main` triggers `.github/workflows/deploy-staging.yml`, which runs two parallel jobs:
