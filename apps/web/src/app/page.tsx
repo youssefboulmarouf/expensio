@@ -37,14 +37,8 @@ export default function Home() {
               value={data.status === 'ok' ? 'healthy' : 'unhealthy'}
               ok={data.status === 'ok'}
             />
-            <StatusRow
-              label="Database"
-              value={data.database}
-              ok={data.database === 'connected'}
-            />
-            {data.dbError && (
-              <p className="text-xs text-red-500 break-all">{data.dbError}</p>
-            )}
+            <StatusRow label="Database" value={data.database} ok={data.database === 'connected'} />
+            {data.dbError && <p className="text-xs text-red-500 break-all">{data.dbError}</p>}
             <p className="pt-1 text-xs text-gray-600">
               Last checked: {new Date(data.timestamp).toLocaleTimeString()}
             </p>
