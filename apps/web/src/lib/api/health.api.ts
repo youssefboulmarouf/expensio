@@ -1,4 +1,4 @@
-import { apiFetch } from './client';
+import { apiRequest } from './client';
 
 export type HealthResponse = {
   status: string;
@@ -8,5 +8,5 @@ export type HealthResponse = {
 };
 
 export function getHealth(): Promise<HealthResponse> {
-  return apiFetch<HealthResponse>('/health');
+  return apiRequest<HealthResponse>('/health');
 }

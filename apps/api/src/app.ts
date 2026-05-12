@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
 import { prisma } from './lib/prisma';
+import authRouter from './modules/auth/auth.router';
 
 const app = express();
 
@@ -13,6 +14,8 @@ app.use(helmet());
 app.use(cors({ origin: allowedOrigins }));
 app.use(morgan('dev'));
 app.use(express.json());
+
+app.use('/auth', authRouter);
 
 app.get('/health', async (_req, res) => {
   let dbStatus = 'disconnected';
