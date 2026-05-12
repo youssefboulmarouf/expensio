@@ -109,9 +109,7 @@ export function RegisterForm() {
               onBlur: handleEmailBlur,
             })}
           />
-          {isChecking && (
-            <Spinner className="absolute right-3 top-2.5 h-4 w-4 text-gray-400" />
-          )}
+          {isChecking && <Spinner className="absolute right-3 top-2.5 h-4 w-4 text-gray-400" />}
           {emailStatus === 'available' && (
             <span className="absolute right-3 top-2.5 text-xs text-green-400">✓ Available</span>
           )}
@@ -146,7 +144,7 @@ export function RegisterForm() {
           disabled={isSubmitting}
           {...register('confirmPassword', {
             required: 'Please confirm your password',
-            validate: v => v === watch('password') || 'Passwords do not match',
+            validate: (v) => v === watch('password') || 'Passwords do not match',
           })}
         />
         {errors.confirmPassword && (

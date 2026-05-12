@@ -24,8 +24,10 @@ describe('registerSchema', () => {
   });
 
   it('rejects a missing email', () => {
-    const { email: _omit, ...rest } = validRegister;
-    const result = registerSchema.safeParse(rest);
+    const result = registerSchema.safeParse({
+      password: validRegister.password,
+      fullName: validRegister.fullName,
+    });
     expect(result.success).toBe(false);
   });
 

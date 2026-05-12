@@ -10,6 +10,7 @@
     "dev": "concurrently --names \"api,web\" --prefix-colors \"blue,green\" \"npm run dev --workspace=apps/api\" \"npm run dev --workspace=apps/web\"",
     "build": "npm run build --workspaces --if-present",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "lint:fix": "npm run lint -- --fix",
     "type-check": "npm run type-check --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
     "db:migrate": "npm run db:migrate --workspace=apps/api",
