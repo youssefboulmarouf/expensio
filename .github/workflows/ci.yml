@@ -76,6 +76,8 @@ jobs:
         run: npm ci
       - name: Build shared package
         run: npm run build --workspace=packages/shared
+      - name: Generate Prisma client
+        run: npm run db:generate --workspace=apps/api
       - name: Run database migrations
         run: npm run db:migrate:ci --workspace=apps/api
       - name: Run API tests
