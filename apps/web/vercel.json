@@ -1,5 +1,7 @@
 {
   "framework": "nextjs",
+  "buildCommand": "npm run build -w packages/shared && npm run build -w apps/web",
+  "outputDirectory": "apps/web/.next",
   "headers": [
     {
       "source": "/(.*)",
